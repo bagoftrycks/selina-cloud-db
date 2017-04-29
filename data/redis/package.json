@@ -1,0 +1,15 @@
+{
+  "name": "mechanist-redis",
+  "version": "1.0.0",
+  "description": "A ready-to-use redis environment based on Docker",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bagoftrycks/mechanist-redis.git"
+  },
+  "keywords": [
+    "redis",
+    "docker"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/bagoftrycks/mechanist-redis#readme"
+}

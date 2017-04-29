@@ -1,0 +1,11 @@
+sudo: required
+services:
+- docker
+- docker-compose
+install:
+- docker-compose up -d
+script: docker ps
+notifications:
+  slack:
+    secure: aFQ1hLNRkYYMauMFPw6Nb3OMfBIqdHsmAgsYBLju/2XgPLFKxTh3+ST57Wr/3qItQrLGSBQ5C+I40qcuiMWl7bnz4vXAKXq2VpjCLzujJm/4JsBZ3NRpfl0SmnguOhqKyR4gVR9B+I+5ztQ1UeNJOC5HneEDKU3K49KoLD5w9gT7VtiRtAPqszpMjXMBntK3bObnXilHQys05SYsjuMbBxYIj1PvTjsDqNUyHS215cW8CsU1hsZM+oSVmIvQIp1ZwgIyCpqgmYYoIwzW/AENXrLh848UK+xOxyD8/t4e6+BDvux/D2joasNnwclPnZkiA24F7IcQgg6+sEyCJUecTQdgErD9MxufheCLOU4lnegJg0ZOAgUu//nQD/n3jG3BQIOykfUTUZNAiyvlfSySd7kePAq8R+k4VGNfLx95nRsFj6IVdKHv9jFqkXYlvCYT2MyX8lDL2GRUba8F+1JUIwvaCv3AXH9JzJVaUtmtvr5pCd27/hmh6uhq4GtzT95SDXv5DiLbTqoympr1wuy8vSKh2oMf53JGpIN5xfUhOK3djKAyZJ+prGaed1eiG4AfKuW+fV55XO4L1FI3huMPgcpMKOXGJO8PgZuDER/hCXsuieSU64y+h904GBeQn49zYL2dYCJ+P51qz5ZOpdljLLU+BarJP1SXEuAZEwKij8I=
+
