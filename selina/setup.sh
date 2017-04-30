@@ -21,7 +21,9 @@ source bootstrap.sh
 source docker.sh
 
 # Install docker-compose
-curl -L https://github.com/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+if [[ ! -f /usr/local/bin/docker-compose ]]; then
+  curl -L https://github.com/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+  chmod +x /usr/local/bin/docker-compose
+fi
 
 log "Setup complete!"
