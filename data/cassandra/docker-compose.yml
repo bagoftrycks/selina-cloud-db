@@ -1,0 +1,30 @@
+version: "2.1"
+
+services:
+
+  cassandra-1-seed:
+    image: cassandra:3.10
+    volumes:
+      - /home/cassandra/cassandra-1-seed:/var/lib/cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=selina
+
+  cassandra-2:
+    image: cassandra:3.10
+    volumes:
+      - /home/cassandra/cassandra-2:/var/lib/cassandra
+    links:
+      - cassandra-1-seed
+    environment:
+      - CASSANDRA_CLUSTER_NAME=selina
+      - CASSANDRA_SEEDS=cassandra-1-seed
+
+  cassandra-3:
+    image: cassandra:3.10
+    volumes:
+      - /home/cassandra/cassandra-3:/var/lib/cassandra
+    links:
+      - cassandra-1-seed
+    environment:
+      - CASSANDRA_CLUSTER_NAME=selina
+      - CASSANDRA_SEEDS=cassandra-1-seed

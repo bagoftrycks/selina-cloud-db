@@ -26,4 +26,18 @@ if [[ ! -f /usr/local/bin/docker-compose ]]; then
   chmod +x /usr/local/bin/docker-compose
 fi
 
+# Config cassandra volumes shit
+useradd cassandra
+if [[ -d /data/var/db/cassandra ]]; then
+  cp -r /data/var/db/cassandra /home/
+  chown -R cassandra:cassandra /home/cassandra
+fi
+
+if [[ ! "$(crontab -l | grep "cassandra")" != "" ]]; then
+  crontab -l > /tmp/cronshit
+  echo "0 */3 * * * cp -r /home/cassandra /data/var/db/" >> /tmp/cronshit
+  crontab /tmp/cronshit
+  rm /tmp/cronshit
+fi
+
 log "Setup complete!"
