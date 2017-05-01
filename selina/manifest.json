@@ -3,10 +3,10 @@
     "name": "databases.sasrio.xyz",
     "hostname": "databases.sasrio.xyz",
     "box": "debian/jessie64",
-    "ram": 16384,
+    "ram": 8192,
     "vcpu": 4,
-    "ssh_guest_port": 7007,
-    "private_ip_addr": "10.70.70.7",
+    "ssh_guest_port": 7006,
+    "private_ip_addr": "10.70.70.6",
     "scripts": [
       [
         "setup.sh", []
