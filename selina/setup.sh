@@ -20,6 +20,8 @@ source bootstrap.sh
 # Install docker
 source docker.sh
 
+apt-get install curl -y
+
 # Install docker-compose
 if [[ ! -f /usr/local/bin/docker-compose ]]; then
   curl -L https://github.com/docker/compose/releases/download/1.12.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
