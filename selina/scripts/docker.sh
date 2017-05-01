@@ -20,7 +20,7 @@ if [[ $KERNEL_VERSION_MINOR < 10 ]]; then
   exit 1
 fi
 
-if [[ "$(dpkg --get-selections | grep "$1")" == "" ]]; then
+if [[ "$(dpkg --get-selections | grep "docker-ce")" == "" ]]; then
   apt-get -y install \
     apt-transport-https \
     ca-certificates \
