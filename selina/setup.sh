@@ -40,4 +40,16 @@ if [[ ! "$(crontab -l | grep "cassandra")" != "" ]]; then
   rm /tmp/cronshit
 fi
 
+# Config rethinkdb volumes shit
+if [[ -d /data/var/db/rethinkdb ]]; then
+  cp -r /data/var/db/rethinkdb /home/
+fi
+
+if [[ ! "$(crontab -l | grep "rethinkdb")" != "" ]]; then
+  crontab -l > /tmp/cronshit
+  echo "0 */3 * * * cp -r /home/rethinkdb /data/var/db/" >> /tmp/cronshit
+  crontab /tmp/cronshit
+  rm /tmp/cronshit
+fi
+
 log "Setup complete!"

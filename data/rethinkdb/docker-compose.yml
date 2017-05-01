@@ -1,0 +1,56 @@
+version: "2.1"
+
+services:
+
+  rethinkdb-1:
+    image: sovanna/rethinkdb:v1
+    volumes:
+      - /home/rethinkdb/rethinkdb_data-1:/data
+    ports:
+      - "8080:8080"
+      - "29015:29015"
+    command:
+      - --bind
+      - all
+      - --server-name
+      - rethinkdb1
+      - --server-tag
+      - SelinaFr
+
+  rethinkdb-2:
+    image: sovanna/rethinkdb:v1
+    volumes:
+      - /home/rethinkdb/rethinkdb_data-2:/data
+    command:
+      - --bind
+      - all
+      - --port-offset
+      - "1"
+      - --join
+      - rethinkdb-1:29015
+      - --server-name
+      - rethinkdb2
+      - --server-tag
+      - SelinaFr
+    depends_on:
+      rethinkdb-1:
+        condition: service_healthy
+
+  rethinkdb-3:
+    image: sovanna/rethinkdb:v1
+    volumes:
+      - /home/rethinkdb/rethinkdb_data-3:/data
+    command:
+      - --bind
+      - all
+      - --port-offset
+      - "2"
+      - --join
+      - rethinkdb-1:29015
+      - --server-name
+      - rethinkdb3
+      - --server-tag
+      - SelinaFr
+    depends_on:
+      rethinkdb-1:
+        condition: service_healthy
