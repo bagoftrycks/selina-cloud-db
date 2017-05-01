@@ -20,29 +20,31 @@ if [[ $KERNEL_VERSION_MINOR < 10 ]]; then
   exit 1
 fi
 
-apt-get -y install \
-  apt-transport-https \
-  ca-certificates \
-  curl \
-  software-properties-common
+if [[ "$(dpkg --get-selections | grep "$1")" == "" ]]; then
+  apt-get -y install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    software-properties-common
 
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-add-apt-repository \
-         "deb [arch=amd64] https://download.docker.com/linux/debian \
-         $(lsb_release -cs) \
-         stable"
+  curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+  add-apt-repository \
+           "deb [arch=amd64] https://download.docker.com/linux/debian \
+           $(lsb_release -cs) \
+           stable"
 
-apt-get update
-apt-get -y install docker-ce
+  apt-get update
+  apt-get -y install docker-ce
 
-GROUP_DOCKER="docker"
-if [[ "$(getent group "$GROUP_DOCKER" | grep "$GROUP_DOCKER")" != "" ]]; then
-  log "group $GROUP_DOCKER does exist"
-else
-  addgroup "$GROUP_DOCKER"
+  GROUP_DOCKER="docker"
+  if [[ "$(getent group "$GROUP_DOCKER" | grep "$GROUP_DOCKER")" != "" ]]; then
+    log "group $GROUP_DOCKER does exist"
+  else
+    addgroup "$GROUP_DOCKER"
+  fi
+  usermod -aG docker vagrant
+  systemctl enable docker
+  docker run hello-world
 fi
-usermod -aG docker vagrant
-systemctl enable docker
-docker run hello-world
 
 log "--- End: Bootstrap Docker host ---"
