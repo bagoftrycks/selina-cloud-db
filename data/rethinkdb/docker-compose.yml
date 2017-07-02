@@ -9,6 +9,7 @@ services:
     ports:
       - "8080:8080"
       - "29015:29015"
+      - "28015:28015"
     command:
       - --bind
       - all
